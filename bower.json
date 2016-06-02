@@ -1,0 +1,26 @@
+{
+  "name": "meek",
+  "description": "Construct standard status-data JSON format for response.",
+  "main": "meek.js",
+  "authors": [
+    "Richeve S. Bebedor <richeve.bebedor@gmail.com>"
+  ],
+  "license": "MIT",
+  "keywords": [
+    "response-format",
+    "status-data"
+  ],
+  "homepage": "https://github.com/volkovasystems/meek",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "harden": "^0.3.0",
+    "called": "^0.0.2",
+    "asea": "^0.0.1"
+  }
+}
