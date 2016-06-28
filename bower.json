@@ -1,5 +1,6 @@
 {
   "name": "meek",
+  "version": "0.0.1",
   "description": "Construct standard status-data JSON format for response.",
   "main": "meek.js",
   "authors": [
@@ -19,8 +20,8 @@
     "tests"
   ],
   "dependencies": {
-    "harden": "^0.3.0",
-    "called": "^0.0.2",
-    "asea": "^0.0.1"
+    "called": "^0.0.5",
+    "harden": "^0.3.2",
+    "asea": "^0.0.2"
   }
 }
