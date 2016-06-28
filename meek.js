@@ -126,16 +126,23 @@ var meek = function meek( status, data ){
 
 			response.statusCode = response.statusCode || code || 200;
 
-			response.setHeader( "Content-Type", "application/json" );
-			response.setHeader( "Cache-Control", [
-				"no-cache",
-				"no-store",
-				"must-revalidate"
-			] );
-			response.setHeader( "Pragma", "no-cache" );
-			response.setHeader( "Expires", "0" );
+			if( typeof response.setHeader == "function" ){
+				response.setHeader( "Content-Type", "application/json" );
+				response.setHeader( "Cache-Control", [
+					"no-cache",
+					"no-store",
+					"must-revalidate"
+				] );
+				response.setHeader( "Pragma", "no-cache" );
+				response.setHeader( "Expires", "0" );
 
-			response.end( JSON.stringify( construct ) );
+			}else if( !meek.silent ){
+				console.log( "warning, cannot configure response header" );
+			}
+
+			if( typeof response.end == "function" ){
+				response.end( JSON.stringify( construct ) );
+			}
 
 			return construct;
 		}, construct );
