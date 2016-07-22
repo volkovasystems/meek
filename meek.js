@@ -1,6 +1,6 @@
 "use strict";
 
-/*:
+/*;
 	@module-license:
 		The MIT License (MIT)
 		@mit-license
@@ -45,14 +45,17 @@
 		Returns a status-data JSON object.
 
 		Supplementary @code:send; method is applied to the construct enabling better
-			readability of the code. This will accept response object
+			readability of the code. This will accept response object.
+
+		Response are not cached.
 	@end-module-documentation
 
 	@include:
 		{
 			"asea": "asea",
 			"called": "called",
-			"harden": "harden"
+			"harden": "harden",
+			"http": "http"
 		}
 	@end-include
 */
@@ -90,7 +93,7 @@ harden( "PROMPT", "prompt" );
 harden( "SUCCESS", "success" );
 
 var meek = function meek( status, data ){
-	/*:
+	/*;
 		@meta-configuration:
 			{
 				"status": [
@@ -158,6 +161,10 @@ var meek = function meek( status, data ){
 	}
 
 	return construct;
+};
+
+meek.setSilent = function setSilent( silent ){
+	meek.silent = silent;
 };
 
 if( asea.server ){
