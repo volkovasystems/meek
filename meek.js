@@ -57,7 +57,8 @@
 			"asea": "asea",
 			"called": "called",
 			"harden": "harden",
-			"http": "http"
+			"http": "http",
+			"offcache": "offcache"
 		}
 	@end-include
 */
@@ -67,6 +68,7 @@ if( typeof window == "undefined" ){
 	var called = require( "called" );
 	var harden = require( "harden" );
 	var http = require( "http" );
+	var offcache = require( "offcache" );
 }
 
 if( typeof window != "undefined" &&
@@ -163,18 +165,11 @@ var meek = function meek( status, data ){
 		}, construct );
 
 		harden( "send", function send( response, code ){
+			offcache( response );
+
 			return construct
 				.reply( response, {
-					"code": code,
-					"header": {
-						"Cache-Control": [
-							"no-cache",
-							"no-store",
-							"must-revalidate"
-						],
-						"Pragma": "no-cache",
-						"Expires": "0"
-					}
+					"code": code
 				} );
 		}, construct );
 
