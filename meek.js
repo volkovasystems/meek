@@ -48,6 +48,8 @@
 			readability of the code. This will accept response object.
 
 		Response are not cached.
+
+		Use reply for better flexibility.
 	@end-module-documentation
 
 	@include:
@@ -119,28 +121,38 @@ var meek = function meek( status, data ){
 		construct.data = data;
 	}
 
+	harden( "toJSON", function toJSON( ){
+		var _construct = {
+			"status": status
+		};
+
+		if( construct.data ){
+			_construct.data = data;
+		}
+
+		return _construct;
+	},  construct );
+
 	if( asea.server ){
-		harden( "send", function send( response, code ){
+		harden( "reply", function reply( response, option ){
 			if( !response ||
 				!( response instanceof http.ServerResponse ) )
 			{
 				throw new Error( "invalid response" );
 			}
 
-			response.statusCode = response.statusCode || code || 200;
+			response.statusCode = response.statusCode || option.code || 200;
 
 			if( typeof response.setHeader == "function" ){
 				response.setHeader( "Content-Type", "application/json" );
-				response.setHeader( "Cache-Control", [
-					"no-cache",
-					"no-store",
-					"must-revalidate"
-				] );
-				response.setHeader( "Pragma", "no-cache" );
-				response.setHeader( "Expires", "0" );
+			}
 
-			}else if( !meek.silent ){
-				console.log( "warning, cannot configure response header" );
+			if( typeof response.setHeader == "function" &&
+				typeof option.header == "object" )
+			{
+				for( var header in option.header ){
+					response.setHeader( header, option.header[ header ] );
+				}
 			}
 
 			if( typeof response.end == "function" ){
@@ -148,6 +160,22 @@ var meek = function meek( status, data ){
 			}
 
 			return construct;
+		}, construct );
+
+		harden( "send", function send( response, code ){
+			return construct
+				.reply( response, {
+					"code": code,
+					"header": {
+						"Cache-Control": [
+							"no-cache",
+							"no-store",
+							"must-revalidate"
+						],
+						"Pragma": "no-cache",
+						"Expires": "0"
+					}
+				} );
 		}, construct );
 
 	}else{
@@ -161,10 +189,6 @@ var meek = function meek( status, data ){
 	}
 
 	return construct;
-};
-
-meek.setSilent = function setSilent( silent ){
-	meek.silent = silent;
 };
 
 if( asea.server ){
