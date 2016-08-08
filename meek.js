@@ -146,7 +146,7 @@ var meek = function meek( status, data ){
 			response.statusCode = response.statusCode || option.code || 200;
 
 			if( typeof response.setHeader == "function" ){
-				response.setHeader( "Content-Type", "application/json" );
+				response.setHeader( "Content-Type", "text/json" );
 			}
 
 			if( typeof response.setHeader == "function" &&
