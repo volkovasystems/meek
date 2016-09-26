@@ -124,22 +124,20 @@ var meek = function meek( status, data ){
 	}
 
 	harden( "toJSON", function toJSON( ){
-		var _construct = {
+		var structure = {
 			"status": status
 		};
 
 		if( construct.data ){
-			_construct.data = data;
+			structure.data = data;
 		}
 
-		return _construct;
+		return structure;
 	},  construct );
 
 	if( asea.server ){
 		harden( "reply", function reply( response, option ){
-			if( !response ||
-				!( response instanceof http.ServerResponse ) )
-			{
+			if( !response || !( response instanceof http.ServerResponse ) ){
 				throw new Error( "invalid response" );
 			}
 
