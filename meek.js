@@ -34,6 +34,9 @@
 			"file": "meek.js",
 			"module": "meek",
 			"author": "Richeve S. Bebedor",
+			"contributors": [
+				"John Lenon Maghanoy <johnlenonmaghanoy@gmail.com>"
+			],
 			"eMail": "richeve.bebedor@gmail.com",
 			"repository": "https://github.com/volkovasystems/meek.git",
 			"test": "meek-test.js",
@@ -56,38 +59,23 @@
 		{
 			"asea": "asea",
 			"called": "called",
+			"clazof": "clazof",
 			"harden": "harden",
 			"http": "http",
-			"offcache": "offcache"
+			"offcache": "offcache",
+			"protype": "protype"
 		}
 	@end-include
 */
 
-if( typeof window == "undefined" ){
-	var asea = require( "asea" );
-	var called = require( "called" );
-	var harden = require( "harden" );
-	var http = require( "http" );
-	var offcache = require( "offcache" );
-}
+const asea = require( "asea" );
+const called = require( "called" );
+const clazof = require( "clazof" );
+const harden = require( "harden" );
+const http = require( "http" );
+const offcache = require( "offcache" );
+const protype = require( "protype" );
 
-if( typeof window != "undefined" &&
-	!( "asea" in window ) )
-{
-	throw new Error( "asea is not defined" );
-}
-
-if( asea.client &&
-	!( "called" in window ) )
-{
-	throw new Error( "called is not defined" );
-}
-
-if( asea.client &&
-	!( "harden" in window ) )
-{
-	throw new Error( "harden is not defined" );
-}
 
 //: These are default statuses you can use globally.
 harden( "FATAL", "fatal" );
@@ -96,7 +84,7 @@ harden( "FAILED", "failed" );
 harden( "PROMPT", "prompt" );
 harden( "SUCCESS", "success" );
 
-var meek = function meek( status, data ){
+const meek = function meek( status, data ){
 	/*;
 		@meta-configuration:
 			{
@@ -111,11 +99,11 @@ var meek = function meek( status, data ){
 
 	status = status || PROMPT;
 
-	if( typeof status != "string" ){
+	if( !protype( status, STRING ) ){
 		throw new Error( "invalid status" );
 	}
 
-	var construct = {
+	let construct = {
 		"status": status
 	};
 
@@ -124,7 +112,7 @@ var meek = function meek( status, data ){
 	}
 
 	harden( "toJSON", function toJSON( ){
-		var structure = {
+		let structure = {
 			"status": status
 		};
 
@@ -137,25 +125,25 @@ var meek = function meek( status, data ){
 
 	if( asea.server ){
 		harden( "reply", function reply( response, option ){
-			if( !response || !( response instanceof http.ServerResponse ) ){
+			if( !response || !( clazof( response, http.ServerResponse ) ) ){
 				throw new Error( "invalid response" );
 			}
 
 			response.statusCode = response.statusCode || option.code || 200;
 
-			if( typeof response.setHeader == "function" ){
+			if( protype( response.setHeader, FUNCTION ) ){
 				response.setHeader( "Content-Type", "text/json" );
 			}
 
-			if( typeof response.setHeader == "function" &&
-				typeof option.header == "object" )
+			if( protype( response.setHeader, FUNCTION ) &&
+				protype( option.header, OBJECT ) )
 			{
-				for( var header in option.header ){
+				for( let header in option.header ){
 					response.setHeader( header, option.header[ header ] );
 				}
 			}
 
-			if( typeof response.end == "function" ){
+			if( protype( response.end, FUNCTION ) ){
 				response.end( JSON.stringify( construct ) );
 			}
 
@@ -184,6 +172,4 @@ var meek = function meek( status, data ){
 	return construct;
 };
 
-if( asea.server ){
-	module.exports = meek;
-}
+module.exports = meek;

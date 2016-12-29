@@ -1,10 +1,10 @@
 {
   "name": "meek",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "Construct standard status-data JSON format for response.",
   "main": "meek.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha meek-test.js"
   },
   "repository": {
     "type": "git",
@@ -15,15 +15,20 @@
     "status-data"
   ],
   "author": "Richeve S. Bebedor <richeve.bebedor@gmail.com>",
+  "contributors": [
+    "John Lenon Maghanoy <johnlenonmaghanoy@gmail.com>"
+  ],
   "license": "MIT",
   "bugs": {
     "url": "https://github.com/volkovasystems/meek/issues"
   },
   "homepage": "https://github.com/volkovasystems/meek#readme",
   "dependencies": {
-    "asea": "^0.1.2",
-    "called": "^0.1.2",
-    "harden": "^0.3.5",
-    "offcache": "0.0.1"
+    "asea": "^0.6.0",
+    "called": "^0.5.0",
+    "clazof": "^0.1.0",
+    "harden": "^0.12.0",
+    "offcache": "^0.2.0",
+    "protype": "^0.7.0"
   }
 }
