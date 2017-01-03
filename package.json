@@ -1,9 +1,12 @@
 {
   "name": "meek",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "Construct standard status-data JSON format for response.",
   "main": "meek.js",
+  "support": "meek.support.js",
+  "deploy": "meek.deploy.js",
   "scripts": {
+    "build": "babel meek.js -o meek.support.js && webpack",
     "test": "mocha meek-test.js"
   },
   "repository": {
@@ -25,10 +28,19 @@
   "homepage": "https://github.com/volkovasystems/meek#readme",
   "dependencies": {
     "asea": "^0.6.0",
+    "babel-runtime": "^6.20.0",
     "called": "^0.5.0",
     "clazof": "^0.1.0",
     "harden": "^0.12.0",
     "offcache": "^0.2.0",
     "protype": "^0.7.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-core": "^6.21.0",
+    "babel-plugin-transform-runtime": "^6.15.0",
+    "babel-preset-latest": "^6.16.0",
+    "source-map-loader": "^0.1.5",
+    "webpack": "^1.14.0"
   }
 }
