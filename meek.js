@@ -72,10 +72,12 @@ const asea = require( "asea" );
 const called = require( "called" );
 const clazof = require( "clazof" );
 const harden = require( "harden" );
-const http = require( "http" );
-const offcache = require( "offcache" );
 const protype = require( "protype" );
 
+//: @server:
+const http = require( "http" );
+const offcache = require( "offcache" );
+//: @end-server
 
 //: These are default statuses you can use globally.
 harden( "FATAL", "fatal" );
@@ -103,25 +105,21 @@ const meek = function meek( status, data ){
 		throw new Error( "invalid status" );
 	}
 
-	let construct = {
-		"status": status
-	};
+	let construct = { "status": status };
 
 	if( arguments.length == 2 ){
 		construct.data = data;
 	}
 
 	harden( "toJSON", function toJSON( ){
-		let structure = {
-			"status": status
-		};
+		let structure = { "status": status };
 
 		if( construct.data ){
 			structure.data = data;
 		}
 
 		return structure;
-	},  construct );
+	}, construct );
 
 	if( asea.server ){
 		harden( "reply", function reply( response, option ){
@@ -159,7 +157,7 @@ const meek = function meek( status, data ){
 				} );
 		}, construct );
 
-	}else{
+	}else if( asea.client ){
 		harden( "send", function send( procedure ){
 			procedure = called( procedure );
 
@@ -167,6 +165,9 @@ const meek = function meek( status, data ){
 
 			return construct;
 		}, construct );
+
+	}else{
+		throw new Error( "cannot determine platform" );
 	}
 
 	return construct;
