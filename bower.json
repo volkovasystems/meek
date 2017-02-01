@@ -1,10 +1,8 @@
 {
   "name": "meek",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Construct standard status-data JSON format for response.",
-  "main": "meek.js",
-  "support": "meek.support.js",
-  "deploy": "meek.deploy.js",
+  "main": "meek.deploy.js",
   "authors": [
     "Richeve S. Bebedor <richeve.bebedor@gmail.com>",
     "John Lenon Maghanoy <johnlenonmaghanoy@gmail.com>"
