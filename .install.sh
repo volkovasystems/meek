@@ -27,4 +27,5 @@ called \
 clazof \
 harden \
 protype \
---save
+--save \
+--force-latest
