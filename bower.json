@@ -1,6 +1,6 @@
 {
   "name": "meek",
-  "version": "0.13.0",
+  "version": "0.14.0",
   "description": "Construct standard status-data JSON format for response.",
   "main": "meek.deploy.js",
   "support": "meek.support.js",
@@ -23,8 +23,8 @@
   ],
   "dependencies": {
     "asea": "^0.13.0",
-    "called": "^0.23.0",
-    "clazof": "^0.22.0",
+    "called": "^0.24.0",
+    "clazof": "^0.24.0",
     "harden": "^0.21.0",
     "protype": "^0.21.0"
   }
