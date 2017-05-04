@@ -1,6 +1,6 @@
 {
   "name": "meek",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "description": "Construct standard status-data JSON format for response.",
   "main": "meek.js",
   "support": "meek.support.js",
@@ -30,10 +30,10 @@
   "dependencies": {
     "asea": "^0.13.0",
     "babel-runtime": "^6.23.0",
-    "called": "^0.24.0",
-    "clazof": "^0.24.0",
+    "called": "^0.25.0",
+    "clazof": "^0.25.0",
     "harden": "^0.21.0",
-    "offcache": "^0.11.0",
+    "offcache": "^0.12.0",
     "protype": "^0.21.0"
   },
   "devDependencies": {
@@ -48,6 +48,6 @@
     "gulp-rename": "^1.2.2",
     "gulp-replace": "^0.5.4",
     "source-map-loader": "^0.2.1",
-    "webpack": "^2.4.1"
+    "webpack": "^2.5.0"
   }
 }
