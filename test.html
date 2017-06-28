@@ -1,8 +1,36 @@
+<!DOCTYPE html>
 <html>
 	<head>
-		<script
-			type="application/javascript"
-			src="./meek.deploy.js">
-		</script>
+		<title>meek unit test</title>
+
+		<link rel="stylesheet" href="https://code.jquery.com/qunit/qunit-2.3.2.css">
+
+		<script type="application/javascript" src="https://code.jquery.com/qunit/qunit-2.3.2.js"></script>
+
+		<script type="application/javascript" src="./meek.deploy.js"></script>
 	</head>
+
+	<body>
+		<div id="qunit"></div>
+
+		<div id="qunit-fixture"></div>
+
+		<script type="application/javascript">
+			QUnit.test( "meek unit test", function( assert ) {
+
+				assert.deepEqual( meek( SUCCESS, { "name": "simple" } ), { "status": "success", "data": { "name": "simple" } },
+									"should be deeply equal" );
+
+				assert.deepEqual( meek( PROMPT, { "name": "simple" } ), { "status": "prompt", "data": { "name": "simple" } },
+									"should be deeply equal" );
+
+				assert.deepEqual( meek( ISSUE, { "name": "simple" } ), { "status": "issue", "data": { "name": "simple" } },
+									"should be deeply equal" );
+
+				assert.deepEqual( meek( FATAL, { "name": "simple" } ), { "status": "fatal", "data": { "name": "simple" } },
+									"should be deeply equal" );
+									
+			} );
+		</script>
+	</body>
 </html>
