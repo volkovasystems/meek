@@ -1,12 +1,13 @@
 {
   "name": "meek",
-  "version": "0.17.0",
+  "version": "0.18.0",
   "description": "Construct standard status-data JSON format for response.",
   "main": "meek.deploy.js",
   "support": "meek.support.js",
   "authors": [
     "Richeve S. Bebedor <richeve.bebedor@gmail.com>",
-    "John Lenon Maghanoy <johnlenonmaghanoy@gmail.com>"
+    "John Lenon Maghanoy <johnlenonmaghanoy@gmail.com>",
+    "Vinse Vinalon <vinsevinalon@gmail.com>"
   ],
   "license": "MIT",
   "keywords": [
@@ -22,10 +23,10 @@
     "tests"
   ],
   "dependencies": {
-    "asea": "^0.13.0",
-    "called": "^0.27.0",
-    "clazof": "^0.27.0",
-    "harden": "^0.21.0",
-    "protype": "^0.21.0"
+    "asea": "^0.14.0",
+    "called": "^0.31.0",
+    "clazof": "^0.31.0",
+    "harden": "^0.22.0",
+    "protype": "^0.22.0"
   }
 }
