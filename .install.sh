@@ -5,7 +5,6 @@ called \
 clazof \
 harden \
 offcache \
-protype \
 --save && \
 yarn add \
 babel-cli \
@@ -26,6 +25,5 @@ asea \
 called \
 clazof \
 harden \
-protype \
 --save \
 --force-latest

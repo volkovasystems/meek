@@ -63,8 +63,7 @@
 			"clazof": "clazof",
 			"harden": "harden",
 			"http": "http",
-			"offcache": "offcache",
-			"protype": "protype"
+			"offcache": "offcache"
 		}
 	@end-include
 */
@@ -73,7 +72,6 @@ const asea = require( "asea" );
 const called = require( "called" );
 const clazof = require( "clazof" );
 const harden = require( "harden" );
-const protype = require( "protype" );
 
 //: @server:
 const http = require( "http" );
@@ -102,7 +100,7 @@ const meek = function meek( status, data ){
 
 	status = status || PROMPT;
 
-	if( !protype( status, STRING ) ){
+	if( typeof status != "string" ){
 		throw new Error( "invalid status" );
 	}
 
@@ -122,7 +120,7 @@ const meek = function meek( status, data ){
 		return structure;
 	}, construct );
 
-	if( asea.server ){
+	if( asea.SERVER ){
 		harden( "reply", function reply( response, option ){
 			if( !response || !( clazof( response, http.ServerResponse ) ) ){
 				throw new Error( "invalid response" );
@@ -130,19 +128,19 @@ const meek = function meek( status, data ){
 
 			response.statusCode = response.statusCode || option.code || 200;
 
-			if( protype( response.setHeader, FUNCTION ) ){
+			if( typeof response.setHeader == "function" ){
 				response.setHeader( "Content-Type", "text/json" );
 			}
 
-			if( protype( response.setHeader, FUNCTION ) &&
-				protype( option.header, OBJECT ) )
+			if( typeof response.setHeader == "function" &&
+				typeof option.header == "object" )
 			{
 				for( let header in option.header ){
 					response.setHeader( header, option.header[ header ] );
 				}
 			}
 
-			if( protype( response.end, FUNCTION ) ){
+			if( typeof response.end == "function" ){
 				response.end( JSON.stringify( construct ) );
 			}
 
@@ -158,7 +156,7 @@ const meek = function meek( status, data ){
 				} );
 		}, construct );
 
-	}else if( asea.client ){
+	}else if( asea.CLIENT ){
 		harden( "send", function send( procedure ){
 			procedure = called( procedure );
 
